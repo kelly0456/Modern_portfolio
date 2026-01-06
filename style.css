@@ -1,0 +1,622 @@
+/* Import Google Fonts - Inter for a clean, modern typeface */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* Basic Resets and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle, #0f172a, #000);
+    color: #ecf0f1; 
+    font-family: 'Inter', sans-serif; 
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #2d3748;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #4a5568; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Header Styling */
+.header {
+    background-color: #0d1b2a;
+    padding: 1.2rem 2rem;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky; 
+    top: 0;
+    z-index: 1000; 
+    
+}
+
+.navbar-logo {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #0ff; /* Bright cyan for logo */
+    margin-bottom: 0.8rem;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+    justify-content: center;
+    gap: 1.8rem; /* Space between links */
+}
+
+.navbar-links li a {
+    color: #ecf0f1;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    position: relative; /* For underline effect */
+}
+
+.navbar-links li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #0ff; /* Cyan underline */
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
+}
+
+.navbar-links li a:hover {
+    color: #0ff; /* Bright cyan on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+.navbar-links li a:hover::after {
+    width: 100%; /* Expand underline on hover */
+}
+
+/* Profile Section Styling (Home Page Specific) */
+.profile-section {
+    flex-grow: 1; /* Allows this section to take available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    gap: 3rem; /* Space between ring and text */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+}
+.ring {
+    position: relative;
+    width: 280px;   
+    height: 250px;  
+    border-radius: 50%;  
+    border: 5px solid #0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    flex-shrink: 0;
+    animation: rotateRing 60s linear infinite; 
+}
+
+
+.tech-icons-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: rotateIcons 20s linear infinite; 
+    transform-origin: center center;
+    animation: backwards;
+}
+
+/* Ensure the image is in the middle and layered above icons */
+.center-image {
+    width: 150px; /* Base image size */
+    height: 90px;
+    border-radius: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f172a; /* Dark background for image placeholder */
+    border: 3px solid #0ff; /* Cyan border around image */
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); /* Cyan glow for image */
+    position: relative; /* Needed for z-index to work */
+    z-index: 2; /* HIGHER Z-INDEX: Image appears on top */
+    
+    
+}
+
+.center-image:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0 0 30px #0ff, 0 0 60px rgba(0, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.center-image img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    display: block; /* Remove extra space below image */
+}
+
+/* Styling for tech icons */
+.tech {
+    position: absolute; /* Crucial for positioning around the ring */
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0ff; /* Cyan text for icons */
+    border-radius: 50%;
+    border: 2px solid #0ff; /* Cyan border */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    background: #0d1b2a; /* Dark background for icons */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px; /* Fixed width for consistent circles */
+    height: 260px; /* Fixed height for consistent circles */
+}
+
+.tech:hover {
+    transform: scale(1.2); /* Zoom on hover */
+    box-shadow: 0 0 25px #0ff, 0 0 50px rgba(0, 255, 255, 0.8);
+    background-color: #008080; /* Slightly different dark cyan on hover */
+    cursor: pointer;
+}
+
+.me-profile {
+    background-color: #1a202c; /* Darker background for text box */
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 1rem; /* Add horizontal margin for smaller screens */
+    border: 1px solid #0ff; /* Subtle cyan border */
+}
+
+.me-profile h1 {
+    font-size: 2.8rem;
+    color: #0ff; /* Cyan heading */
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+.me-profile p {
+    font-size: 1.1rem;
+    color: #bbb; /* Lighter gray for paragraph text */
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.me-profile strong {
+    color: #0ff; /* Cyan for strong text */
+    font-weight: 700;
+}
+
+/* General Section Styling (for Hobbies, Services, Projects) */
+.main-content {
+    flex-grow: 1;
+    padding: 3rem 1rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    background-color: #1a202c; /* Darker background */
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid #0ff; /* Subtle cyan border */
+    text-align: center;
+}
+
+.main-content h2 {
+    font-size: 2.5rem;
+    color: #0ff;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+.main-content p {
+    font-size: 1.1rem;
+    color: #bbb;
+    margin-bottom: 1rem;
+}
+
+.main-content ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* Space between list items */
+}
+
+.main-content li {
+    background-color: #2d3748; /* Slightly lighter dark background for list items */
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.main-content li:hover {
+    background-color: #3a475a; /* Darker on hover */
+    transform: translateY(-3px);
+}
+
+/* Projects Specific Styling */
+.project-list {
+    flex-direction: column; /* Stack projects vertically */
+    align-items: center;
+}
+
+.project-list li {
+    width: 100%; /* Full width for project cards */
+    max-width: 600px;
+    padding: 1.5rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    background-color: #2d3748;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.project-list h3 {
+    font-size: 1.5rem;
+    color: #0ff;
+    margin-bottom: 0.5rem;
+}
+
+.project-list p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.project-link {
+    display: inline-block;
+    background-color: #0ff; /* Cyan button */
+    color: #0d1b2a; /* Dark text for button */
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 255, 255, 0.4);
+}
+
+.project-link:hover {
+    background-color: #00e6e6; /* Lighter cyan on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 255, 255, 0.6);
+}
+
+
+/* Footer Styling */
+footer {
+    background-color: #0d1b2a; /* Dark blue-gray, matches header */
+    color: #ecf0f1;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* Pushes footer to the bottom */
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem; /* Space between social icons */
+    margin-bottom: 1.5rem;
+}
+
+.social-links a {
+    color: #0ff; /* Bright cyan for social icons */
+    font-size: 1.1rem;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+.social-links a i {
+    font-size: 1.8rem; /* Larger icon size */
+    margin-right: 0.5rem;
+}
+
+.social-links a:hover {
+    color: #ecf0f1; /* Light text on hover */
+    transform: translateY(-3px); /* Lift effect */
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #95a5a6; /* Lighter gray for copyright */
+}
+
+/* Animations */
+@keyframes rotateRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes counterRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .navbar-logo {
+        margin-bottom: 0;
+    }
+
+    .profile-section {
+        flex-direction: row; /* Side-by-side layout on larger screens */
+        justify-content: center;
+        align-items: center; /* Center vertically */
+        gap: 5rem; /* More space between ring and text */
+    }
+
+    .me-profile {
+        text-align: left;
+        margin: 0; /* Remove horizontal margin */
+    }
+
+    .me-profile h1 {
+        font-size: 3.5rem; /* Larger heading on desktop */
+    }
+
+    .me-profile p {
+        font-size: 1.2rem; /* Slightly larger text */
+    }
+
+    .ring {
+        width: 320px; /* Even larger ring on desktop */
+        height: 320px;
+    }
+
+    .center-image {
+        width: 180px; /* Larger image on desktop */
+        height: 180px;
+    }
+
+    .tech {
+        font-size: 1.4rem; /* Larger tech icons */
+        width: 65px;
+        height: 65px;
+    }
+
+    .main-content h2 {
+        font-size: 3rem;
+    }
+
+    .main-content ul {
+        gap: 1.5rem;
+    }
+
+    .main-content li {
+        font-size: 1.1rem;
+    }
+
+    .project-list li {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 1rem;
+    }
+
+    .navbar-logo {
+        font-size: 1.8rem;
+    }
+
+    .navbar-links {
+        gap: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .ring {
+        width: 220px;
+        height: 220px;
+    }
+
+    .center-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .tech {
+        font-size: 1rem;
+        width: 50px;
+        height: 50px;
+    }
+
+    .me-profile {
+        padding: 1.5rem;
+    }
+
+    .me-profile h1 {
+        font-size: 2.2rem;
+    }
+
+    .me-profile p {
+        font-size: 1rem;
+    }
+
+    .social-links {
+        gap: 1rem;
+    }
+
+    .social-links a i {
+        font-size: 1.5rem;
+    }
+
+    .main-content {
+        padding: 2rem 0.8rem;
+    }
+
+    .main-content h2 {
+        font-size: 2rem;
+    }
+
+    .main-content li {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .project-list li {
+        padding: 1rem;
+    }
+
+    .project-list h3 {
+        font-size: 1.3rem;
+    }
+}
+
+.tagline{
+    color: #00e6e6;
+
+
+}
+
+
+.btn-cv {
+  display: inline-block;
+  background: #0a2342;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.35s ease;
+  box-shadow: 0 0 0px aqua;
+  position:left;
+}
+
+.btn-cv:hover {
+  background: #0a2342;
+  color: #fff;
+  box-shadow: 0 0 12px aqua, 0 0 25px aqua;
+  transform: translateY(-3px);
+}
+
+
+
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease-in-out;
+}
+
+/* Rocket container (for upward movement) */
+.rocket-container {
+    position: relative;
+    animation: liftOff 3s ease-out forwards;
+}
+
+/* Rocket Image */
+.rocket {
+    width: 100px;
+    height: 150px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Rocket_icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: shake 0.15s infinite alternate;
+}
+
+/* Rocket flame */
+.flame {
+    width: 25px;
+    height: 60px;
+    background: linear-gradient(orange, rgb(0, 47, 255));
+    border-radius: 50%;
+    position: absolute;
+    bottom: -55px;
+    left: 37px;
+    animation: flameFlicker 0.1s infinite alternate;
+}
+
+/* Rocket shaking animation */
+@keyframes shake {
+    0% { transform: translateX(-2px); }
+    100% { transform: translateX(2px); }
+}
+
+/* Flame pulsating */
+@keyframes flameFlicker {
+    0% { transform: scaleY(0.8); opacity: 0.8; }
+    100% { transform: scaleY(1.2); opacity: 1; }
+}
+
+/* Rocket lift-off upward animation */
+@keyframes liftOff {
+    0% { transform: translateY(50px); }
+    50% { transform: translateY(-50px); }
+    100% { transform: translateY(-300px) scale(1.4); opacity: 0; }
+}
+
+/* Main Page Content */
+#main-content {
+    display: none;
+    padding: 40px;
+    text-align: center;
+}
