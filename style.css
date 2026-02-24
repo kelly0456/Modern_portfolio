@@ -654,3 +654,156 @@ footer p {
     text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Ring Container */
+.ring {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 5px solid #0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    flex-shrink: 0;
+    animation: rotateRing 60s linear infinite;
+}
+
+/* Center Image */
+.center-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f172a;
+    border: 3px solid #0ff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    position: relative;
+    z-index: 2;
+}
+
+.center-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Outer Icons Around Ring */
+.tech-icons-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+}
+
+/* Each icon positioned with rotation around the center */
+.tech-icons-wrapper .tech {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #0d1b2a;
+    border: 2px solid #0ff;
+    border-radius: 50%;
+    color: #0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Rotate icons around the ring dynamically */
+.tech-icons-wrapper .tech:nth-child(1) { transform: rotate(0deg) translate(140px) rotate(-0deg); }
+.tech-icons-wrapper .tech:nth-child(2) { transform: rotate(45deg) translate(140px) rotate(-45deg); }
+.tech-icons-wrapper .tech:nth-child(3) { transform: rotate(90deg) translate(140px) rotate(-90deg); }
+.tech-icons-wrapper .tech:nth-child(4) { transform: rotate(135deg) translate(140px) rotate(-135deg); }
+.tech-icons-wrapper .tech:nth-child(5) { transform: rotate(180deg) translate(140px) rotate(-180deg); }
+.tech-icons-wrapper .tech:nth-child(6) { transform: rotate(225deg) translate(140px) rotate(-225deg); }
+.tech-icons-wrapper .tech:nth-child(7) { transform: rotate(270deg) translate(140px) rotate(-270deg); }
+.tech-icons-wrapper .tech:nth-child(8) { transform: rotate(315deg) translate(140px) rotate(-315deg); }
+
+/* Hover Effect */
+.tech:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 25px #0ff, 0 0 50px rgba(0, 255, 255, 0.8);
+    background-color: #008080;
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .ring {
+        width: 220px;
+        height: 220px;
+    }
+    .center-image {
+        width: 120px;
+        height: 120px;
+    }
+    .tech-icons-wrapper .tech {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    .tech-icons-wrapper .tech:nth-child(1) { transform: rotate(0deg) translate(110px) rotate(-0deg); }
+    .tech-icons-wrapper .tech:nth-child(2) { transform: rotate(45deg) translate(110px) rotate(-45deg); }
+    .tech-icons-wrapper .tech:nth-child(3) { transform: rotate(90deg) translate(110px) rotate(-90deg); }
+    .tech-icons-wrapper .tech:nth-child(4) { transform: rotate(135deg) translate(110px) rotate(-135deg); }
+    .tech-icons-wrapper .tech:nth-child(5) { transform: rotate(180deg) translate(110px) rotate(-180deg); }
+    .tech-icons-wrapper .tech:nth-child(6) { transform: rotate(225deg) translate(110px) rotate(-225deg); }
+    .tech-icons-wrapper .tech:nth-child(7) { transform: rotate(270deg) translate(110px) rotate(-270deg); }
+    .tech-icons-wrapper .tech:nth-child(8) { transform: rotate(315deg) translate(110px) rotate(-315deg); }
+}
+
+@media (max-width: 480px) {
+    .ring {
+        width: 180px;
+        height: 180px;
+    }
+    .center-image {
+        width: 100px;
+        height: 100px;
+    }
+    .tech-icons-wrapper .tech {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    .tech-icons-wrapper .tech:nth-child(1) { transform: rotate(0deg) translate(90px) rotate(-0deg); }
+    .tech-icons-wrapper .tech:nth-child(2) { transform: rotate(45deg) translate(90px) rotate(-45deg); }
+    .tech-icons-wrapper .tech:nth-child(3) { transform: rotate(90deg) translate(90px) rotate(-90deg); }
+    .tech-icons-wrapper .tech:nth-child(4) { transform: rotate(135deg) translate(90px) rotate(-135deg); }
+    .tech-icons-wrapper .tech:nth-child(5) { transform: rotate(180deg) translate(90px) rotate(-180deg); }
+    .tech-icons-wrapper .tech:nth-child(6) { transform: rotate(225deg) translate(90px) rotate(-225deg); }
+    .tech-icons-wrapper .tech:nth-child(7) { transform: rotate(270deg) translate(90px) rotate(-270deg); }
+    .tech-icons-wrapper .tech:nth-child(8) { transform: rotate(315deg) translate(90px) rotate(-315deg); }
+}
+
+/* Keyframes remain the same */
+@keyframes rotateRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
