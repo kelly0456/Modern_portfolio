@@ -607,7 +607,6 @@ footer p {
     100% { transform: scaleY(1.2); opacity: 1; }
 }
 
-/* Rocket lift-off upward animation */
 @keyframes liftOff {
     0% { transform: translateY(50px); }
     50% { transform: translateY(-50px); }
@@ -752,6 +751,9 @@ footer p {
     background-color: #008080;
     cursor: pointer;
 }
+
+
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
