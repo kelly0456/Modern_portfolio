@@ -29,7 +29,6 @@
     <header class="header">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-
                 <div class="navbar-logo mt-2">WELCOME TO MY PROFILE</div>
 
                 <button class="navbar-toggler mt-2" type="button" data-bs-toggle="collapse"
@@ -46,209 +45,174 @@
                         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     </ul>
                 </div>
-
             </div>
         </nav>
     </header>
 
-<!--rocket-->
-<!-- Loading Screen -->
-
-
-<div id="loading-screen">
-    <div class="rocket-container">
-        <div class="rocket"></div>
-        <div class="flame"></div>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <video class="rocket-video" autoplay muted playsinline>
+            <source src="videos/rocket.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h2>Welcome to Kelly’s Portfolio</h2>
     </div>
-    <h2>Welcome to Kelly’s Portfolio</h2>
-</div>
 
+    <!-- Main content wrapper -->
+    <div id="main-content" style="display:none;">
 
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <div class="container">
+                <div class="ring">
+                    <div class="center-image">
+                        <img src="./images/kelly.jpg" alt="kevoh.jpg"
+                            onerror="this.onerror=null;this.src='https://placehold.co/150x150/0f172a/0ff?text=K.K';">
+                    </div>
 
-
-
-
-
-
-
-
-    <!-- Profile Section -->
-    <section class="profile-section">
-        <div class="container">
-            <div class="ring">
-                <div class="center-image">
-                    <img src="./images/kelly.jpg" alt="kevoh.jpg"
-                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/0f172a/0ff?text=K.K';">
-                </div>
-
-                <div class="tech-icons-wrapper">
-                    <div class="tech">TW</div>
-                    <div class="tech">JS</div>
-                    <div class="tech">🐍</div>
-                    <div class="tech">dj</div>
-                    <div class="tech">⚛️</div>
-                    <div class="tech">CSS</div>
-                    <div class="tech">HTML</div>
-                    <div class="tech">CCTV</div>
+                    <div class="tech-icons-wrapper">
+                        <div class="tech">TW</div>
+                        <div class="tech">JS</div>
+                        <div class="tech">🐍</div>
+                        <div class="tech">dj</div>
+                        <div class="tech">⚛️</div>
+                        <div class="tech">CSS</div>
+                        <div class="tech">HTML</div>
+                        <div class="tech">CCTV</div>
+                        <div class="tech">React</div> <!-- Added React icon -->
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="me-profile">
-            <h1>Kevin Kelly</h1>
-            <h2 class="tagline">Front-End Developer & <br> CCTV Technician</h2>
-            <p>Hello, I'm <strong>Kevin Kelly</strong> — a dedicated student passionate about
-                <strong>web development</strong> and <strong>CCTV installation</strong>. This portfolio showcases my
-                skills, creativity, and growing expertise in building modern digital solutions.</p>
-            <p>Feel free to explore my hobbies, skills, and the services I provide. I'm excited to share my journey in
-                technology and security with you!</p>
-        </div>
+            <div class="me-profile">
+                <h1>Kevin Kelly</h1>
+                <h2 class="tagline">Front-End Developer & <br> CCTV Technician</h2>
+                <p>Hello, I'm <strong>Kevin Kelly</strong> — a dedicated student passionate about
+                    <strong>web development</strong> and <strong>CCTV installation</strong>. This portfolio showcases my
+                    skills, creativity, and growing expertise in building modern digital solutions.</p>
+                <p>Feel free to explore my hobbies, skills, and the services I provide. I'm excited to share my journey in
+                    technology and security with you!</p>
+            </div>
+        </section>
 
-    </section>
+        <!-- Hobbies Section -->
+        <section class="hobbies-section main-content" id="about">
+            <h2>My Hobbies</h2>
+            <ul>
+                <li>Coding and Programming</li>
+                <li>Web Development</li>
+                <li>Artificial Intelligence</li>
+                <li>Open Source Projects</li>
+                <li>Community Building</li>
+                <li>Technical Writing</li>
+                <li>Learning New Technologies</li>
+                <li>Participating in Hackathons</li>
+                <li>Exploring Emerging Tech Trends</li>
+                <li>Contributing to Online Forums</li>
+                <li>Engaging in Educational Workshops</li>
+                <li>Building Personal Projects</li>
+                <li>Networking with Tech Enthusiasts</li>
+            </ul>
+        </section>
 
-    <!-- Hobbies Section -->
-    <section class="hobbies-section main-content" id="about">
-        <h2>My Hobbies</h2>
-        <ul>
-            <li>Coding and Programming</li>
-            <li>Web Development</li>
-            <li>Artificial Intelligence</li>
-            <li>Open Source Projects</li>
-            <li>Community Building</li>
-            <li>Technical Writing</li>
-            <li>Learning New Technologies</li>
-            <li>Participating in Hackathons</li>
-            <li>Exploring Emerging Tech Trends</li>
-            <li>Contributing to Online Forums</li>
-            <li>Engaging in Educational Workshops</li>
-            <li>Building Personal Projects</li>
-            <li>Networking with Tech Enthusiasts</li>
-        </ul>
-    </section>
+        <!-- Services -->
+        <section class="service section" id="service"></section>
 
-    <!-- Services -->
-    <section class="service section" id="service">
-        <h1></h1>
-    </section>
+        <section class="services-section main-content">
+            <h2>My skills.</h2>
+            <p>I offer a range of services including:</p>
+            <ul>
+                <li>Web Development</li>
+                <li>Open Source Contributions</li>
+                <li>Technical Writing and Documentation</li>
+                <li>Consultation on Technology Projects</li>
+                <li>Project Management and Coordination</li>
+                <li>Custom Software Development</li>
+                <li>CCTV installation</li>
+            </ul>
+        </section>
 
-    <section class="services-section main-content">
-        <h2>My skills.</h2>
-        <p>I offer a range of services including:</p>
-        <ul>
-            <li>Web Development</li>
-            <li>Open Source Contributions</li>
-            <li>Technical Writing and Documentation</li>
-            <li>Consultation on Technology Projects</li>
-            <li>Project Management and Coordination</li>
-            <li>Custom Software Development</li>
-            <li>CCTV installation</li>
-        </ul>
-    </section>
+        <!-- Projects Section -->
+        <section class="projects-section main-content" id="projects">
+            <h2>My Projects</h2>
+            <p>Here are some of the projects I've worked on:</p>
 
-    <!-- Projects Section -->
-    <section class="projects-section main-content" id="projects">
-        <h2>My Projects</h2>
-        <p>Here are some of the projects I've worked on:</p>
+            <ul class="project-list">
+                <li>
+                    <h3>Portfolio Website</h3>
+                    <p>Designed and developed a responsive personal portfolio website using HTML, CSS, and JavaScript to
+                        showcase skills and projects.</p>
+                    <a href="https://danny-portfolio-steel.vercel.app/" class="project-link">View Project</a>
+                </li>
 
-        <ul class="project-list">
-            <li>
-                <h3>Portfolio Website</h3>
-                <p>Designed and developed a responsive personal portfolio website using HTML, CSS, and JavaScript to
-                    showcase skills and projects.</p>
-                <a href="https://danny-portfolio-steel.vercel.app/" class="project-link">View Project</a>
-            </li>
+                <li>
+                    <h3>Seatech Cable Ltd</h3>
+                    <p>Developed a website for Seatech Cable Ltd, a company that supplies internet materials and CCTV
+                        installation services.</p>
+                    <a href="https://seatech.vercel.app/index.html" class="project-link">View Project</a>
+                </li>
+            </ul>
+        </section>
 
-            <li>
-                <h3>Seatech Cable Ltd</h3>
-                <p>Developed a website for Seatech Cable Ltd, a company that supplies internet materials and CCTV
-                    installation services.</p>
-                <a href="https://seatech.vercel.app/index.html" class="project-link">View Project</a>
-            </li>
-        </ul>
-    </section>
+        <!-- Contact Section -->
+        <main class="main-content" id="contact">
+            <h2>📞 Contact Me</h2>
+            <p>Let’s connect! You can reach me through any of the platforms below:</p>
 
-    <!-- Contact Section -->
-    <main class="main-content" id="contact">
-        <h2>📞 Contact Me</h2>
-        <p>Let’s connect! You can reach me through any of the platforms below:</p>
+            <ul class="contact-list">
+                <li><a href="https://www.facebook.com/share/14JFNyBCnfv/" target="_blank"><i
+                            class="fa-brands fa-facebook"></i> Facebook</a></li>
 
-        <ul class="contact-list">
-            <li><a href="https://www.facebook.com/share/14JFNyBCnfv/" target="_blank">
-                    <i class="fa-brands fa-facebook"></i> Facebook</a>
-            </li>
+                <li><a href="https://www.instagram.com/one_like_kelly" target="_blank"><i
+                            class="fa-brands fa-instagram"></i> Instagram</a></li>
 
-            <li><a href="https://www.instagram.com/one_like_kelly" target="_blank">
-                    <i class="fa-brands fa-instagram"></i> Instagram</a>
-            </li>
+                <li><a href="https://wa.me/254714199985?text=Hi%20Kevin%2C%20I%27m%20interested%20in%20your%20services"
+                        target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
 
-            <li><a href="https://wa.me/254714199985?text=Hi%20Kevin%2C%20I%27m%20interested%20in%20your%20services"
-                    target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-            </li>
+                <li><a href="https://x.com/kevinkelly0456" target="_blank"><i
+                            class="fa-brands fa-x-twitter"></i> Twitter (X)</a></li>
 
-            <li><a href="https://x.com/kevinkelly0456" target="_blank">
-                    <i class="fa-brands fa-x-twitter"></i> Twitter (X)</a>
-            </li>
+                <li><a href="https://www.youtube.com/@kevinkelly0456" target="_blank"><i
+                            class="fa-brands fa-youtube"></i> YouTube</a></li>
 
-            <li><a href="https://www.youtube.com/@kevinkelly0456" target="_blank">
-                    <i class="fa-brands fa-youtube"></i> YouTube</a>
-            </li>
+                <li><a href="https://www.linkedin.com/in/kevin-kelly-14465a2b0" target="_blank"><i
+                            class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
 
-            <li><a href="https://www.linkedin.com/in/kevin-kelly-14465a2b0" target="_blank">
-                    <i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-            </li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=kevinkellyk194@gmail.com"
+                        target="_blank"><i class="fa-solid fa-envelope"></i> Email Me</a></li>
 
-            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=kevinkellyk194@gmail.com" target="_blank">
-                    <i class="fa-solid fa-envelope"></i> Email Me</a>
-            </li>
+                <li><a href="https://github.com/kevinkelly0456" target="_blank"><i
+                            class="fa-brands fa-github"></i> GitHub</a></li>
 
-            <li><a href="https://github.com/kevinkelly0456" target="_blank">
-                    <i class="fa-brands fa-github"></i> GitHub</a>
-            </li>
+            </ul>
+        </main>
 
-        </ul>
-    </main>
+        <section>
+            <a href="cv.html" target="_blank" class="btn-cv">View My CV</a>
+        </section>
 
+        <!-- Footer -->
+        <footer>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/14JFNyBCnfv/" target="_blank"><i
+                        class="fa-brands fa-square-facebook"></i></a>
+                <a href="https://www.instagram.com/one_like_kelly" target="_blank"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/254714199985?text=Hi%20Kevin%2C%20I%27m%20interested%20in%20your%20services"
+                    target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://x.com/kevinkelly0456?t=iTvctDENOfW7MKZbLUkycA&s=08" target="_blank"><i
+                        class="fa-brands fa-square-x-twitter"></i></a>
+                <a href="https://www.youtube.com/@kevinkelly0456" target="_blank"><i
+                        class="fa-brands fa-square-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/kevin-kelly-14465a2b0" target="_blank"><i
+                        class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:kevinkellyk194@email.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/kevinkelly0456" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
 
-<!-- modern clock way built using JavaScript -->
-   
-
-
-
-
-
-
-
-
-
-
-    <section>
-<a href="cv.html" target="_blank" class="btn-cv">
-    View My CV
-</a>
-
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://www.facebook.com/share/14JFNyBCnfv/" target="_blank"><i
-                    class="fa-brands fa-square-facebook"></i></a>
-            <a href="https://www.instagram.com/one_like_kelly" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://wa.me/254714199985?text=Hi%20Kevin%2C%20I%27m%20interested%20in%20your%20services"
-                target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="https://x.com/kevinkelly0456?t=iTvctDENOfW7MKZbLUkycA&s=08" target="_blank">
-                <i class="fa-brands fa-square-x-twitter"></i></a>
-            <a href="https://www.youtube.com/@kevinkelly0456" target="_blank"><i
-                    class="fa-brands fa-square-youtube"></i></a>
-            <a href="https://www.linkedin.com/in/kevin-kelly-14465a2b0" target="_blank">
-                <i class="fa-brands fa-linkedin"></i></a>
-            <a href="mailto:kevinkellyk194@email.com" target="_blank">
-                <i class="fa-solid fa-envelope"></i></a>
-            <a href="https://github.com/kevinkelly0456" target="_blank"><i class="fa-brands fa-github"></i></a>
-        </div>
-
-        <p>&copy; 2025 Kevin Kelly. All rights reserved.</p>
-    </footer>
+            <p>&copy; 2025 Kevin Kelly. All rights reserved.</p>
+        </footer>
+    </div> <!-- End main-content -->
 
     <!-- Tech Icons JS -->
     <script>
@@ -272,27 +236,20 @@
             });
         });
 
+        window.addEventListener("load", () => {
+            const loading = document.getElementById("loading-screen");
+            const main = document.getElementById("main-content");
 
-
-          // Hide loading screen after 3 seconds
-setTimeout(() => {
-    document.getElementById("loading-screen").style.opacity = "0";
-
-    setTimeout(() => {
-        document.getElementById("loading-screen").style.display = "none";
-        document.getElementById("main-content").style.display = "block";
-    }, 700);
-
-}, 1000); // changed from 3000 to 1000
-
+            // Keep the loading screen visible for 3 seconds
+            setTimeout(() => {
+                loading.style.opacity = 0;
+                setTimeout(() => {
+                    loading.style.display = "none";
+                    main.style.display = "block";
+                }, 800); // fade-out duration
+            }, 3000); // 3 seconds
+        });
     </script>
-
-
-
-
-
-
-
 
 </body>
 </html>

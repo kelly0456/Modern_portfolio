@@ -620,3 +620,37 @@ footer p {
     padding: 40px;
     text-align: center;
 }
+
+
+
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #00e6e6;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.rocket-video {
+    width: 500px;           /* Wider video */
+    max-width: 90%;         /* Responsive for smaller screens */
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+#loading-screen h2 {
+    font-size: 2rem;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    text-align: center;
+}
