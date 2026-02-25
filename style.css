@@ -338,3 +338,31 @@ footer a:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 6px 18px rgba(0, 255, 255, 0.5);
 }
+
+
+
+
+.btn-cv {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #0f172a; /* dark blue/black */
+    color: #fff; /* white text */
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 2px solid #0f172a;
+    transition: all 0.3s ease;
+}
+
+.btn-cv:hover {
+    background-color: #fff; /* white background */
+    color: #0f172a;         /* dark text */
+    border-color: #0f172a;  
+    transform: translateY(-2px); /* subtle lift effect */
+}
+
+.btn-cv:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
