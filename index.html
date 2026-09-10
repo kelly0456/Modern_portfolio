@@ -22,6 +22,10 @@
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress"></div>
 
+    <!-- Ambient Particles & Cursor Glow -->
+    <canvas id="bg-particles" aria-hidden="true"></canvas>
+    <div id="cursor-glow" aria-hidden="true"></div>
+
     <!-- Header -->
     <header class="header">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
@@ -88,6 +92,7 @@
                 </div>
             </div>
             <div class="me-profile">
+                <p class="greeting" id="greeting"></p>
                 <h1>Kevin Kelly</h1>
                 <h2 class="tagline"><span id="typed-1"></span><span class="type-cursor" id="caret-1"></span><br><span id="typed-2"></span><span class="type-cursor" id="caret-2"></span></h2>
                 <p>Hello, I'm <strong>Kevin Kelly</strong> — a dedicated student passionate about
@@ -267,6 +272,15 @@
     </div>
 </footer>
 
+    <!-- Theme Switcher -->
+    <div id="theme-panel" role="group" aria-label="Choose color theme">
+        <button class="theme-dot active" data-theme="" style="--dot:#0ff" title="Cyan (default)" aria-label="Cyan theme"></button>
+        <button class="theme-dot" data-theme="violet" style="--dot:#c084fc" title="Violet" aria-label="Violet theme"></button>
+        <button class="theme-dot" data-theme="emerald" style="--dot:#4ade80" title="Emerald" aria-label="Emerald theme"></button>
+        <button class="theme-dot" data-theme="sunset" style="--dot:#fbbf24" title="Sunset" aria-label="Sunset theme"></button>
+        <button class="theme-dot" data-theme="rose" style="--dot:#fb7185" title="Rose" aria-label="Rose theme"></button>
+    </div>
+
     <!-- Back To Top Button -->
     <button id="back-to-top" aria-label="Back to top" title="Back to top">
         <i class="fa-solid fa-arrow-up"></i>
@@ -410,6 +424,131 @@
                     });
                 }, { threshold: 0.1 });
                 revealTargets.forEach(el => { el.classList.add('reveal'); io.observe(el); });
+            }
+
+            /* ---------- Dynamic Theme Switcher ---------- */
+            const particleState = {
+                rgb: getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim()
+            };
+            const themeDots = document.querySelectorAll('.theme-dot');
+
+            const applyTheme = (name, save) => {
+                if (name) document.documentElement.dataset.theme = name;
+                else document.documentElement.removeAttribute('data-theme');
+                particleState.rgb = getComputedStyle(document.documentElement)
+                    .getPropertyValue('--accent-rgb').trim();
+                themeDots.forEach(d => d.classList.toggle('active', d.dataset.theme === (name || '')));
+                if (save) {
+                    try { localStorage.setItem('kk-theme', name || ''); } catch (err) { /* private mode */ }
+                }
+            };
+
+            themeDots.forEach(dot => dot.addEventListener('click', () => applyTheme(dot.dataset.theme, true)));
+
+            try {
+                const savedTheme = localStorage.getItem('kk-theme');
+                if (savedTheme) applyTheme(savedTheme, false);
+            } catch (err) { /* storage unavailable */ }
+
+            /* ---------- Time-based Greeting ---------- */
+            const greetingEl = document.getElementById('greeting');
+            if (greetingEl) {
+                const hr = new Date().getHours();
+                const greet = hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening';
+                greetingEl.textContent = greet + ' — welcome to my portfolio';
+            }
+
+            /* ---------- Ambient Particle Background ---------- */
+            const canvas = document.getElementById('bg-particles');
+            const glow = document.getElementById('cursor-glow');
+
+            if (canvas && !reduceMotion) {
+                const ctx = canvas.getContext('2d');
+                let W = 0, H = 0, parts = [], animId = null;
+
+                const initParts = () => {
+                    const n = Math.min(Math.round((W * H) / 20000), 90);
+                    parts = Array.from({ length: n }, () => ({
+                        x: Math.random() * W,
+                        y: Math.random() * H,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        r: 0.8 + Math.random() * 1.8,
+                        tw: Math.random() * Math.PI * 2
+                    }));
+                };
+
+                const resize = () => {
+                    W = canvas.width = window.innerWidth;
+                    H = canvas.height = window.innerHeight;
+                    initParts();
+                };
+
+                const draw = () => {
+                    ctx.clearRect(0, 0, W, H);
+                    ctx.fillStyle = `rgba(${particleState.rgb}, 0.9)`;
+                    parts.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.tw += 0.02;
+                        if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
+                        if (p.y < -10) p.y = H + 10; else if (p.y > H + 10) p.y = -10;
+                        ctx.globalAlpha = 0.2 + 0.3 * (0.5 + 0.5 * Math.sin(p.tw));
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    ctx.globalAlpha = 1;
+                    animId = requestAnimationFrame(draw);
+                };
+
+                resize();
+                window.addEventListener('resize', resize);
+                draw();
+
+                /* Pause when tab is hidden (saves battery/CPU) */
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        cancelAnimationFrame(animId);
+                        animId = null;
+                    } else if (!animId) {
+                        draw();
+                    }
+                });
+            }
+
+            /* ---------- Cursor Glow ---------- */
+            if (glow && window.matchMedia('(pointer: fine)').matches && !reduceMotion) {
+                window.addEventListener('mousemove', (e) => {
+                    glow.style.opacity = 1;
+                    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+                }, { passive: true });
+            }
+
+            /* ---------- Click Ripple ---------- */
+            if (!reduceMotion) {
+                document.addEventListener('pointerdown', (e) => {
+                    const r = document.createElement('span');
+                    r.className = 'click-ripple';
+                    r.style.left = e.clientX + 'px';
+                    r.style.top = e.clientY + 'px';
+                    document.body.appendChild(r);
+                    setTimeout(() => r.remove(), 600);
+                });
+            }
+
+            /* ---------- 3D Card Tilt ---------- */
+            if (window.matchMedia('(pointer: fine)').matches && !reduceMotion) {
+                document.querySelectorAll('.main-content ul li').forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const b = card.getBoundingClientRect();
+                        const rx = ((e.clientY - b.top) / b.height - 0.5) * -8;
+                        const ry = ((e.clientX - b.left) / b.width - 0.5) * 8;
+                        card.style.transform =
+                            `perspective(700px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-6px)`;
+                    });
+                    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+                });
             }
         });
     </script>
