@@ -14,11 +14,13 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/jpeg" href="images/kelly.jpg">
 </head>
 
 <body>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
 
     <!-- Header -->
     <header class="header">
@@ -58,6 +60,7 @@
             <source src="videos/rocket.mp4" type="video/mp4">
         </video>
         <h2>Welcome to Kelly’s Portfolio</h2>
+        <button id="skip-loading" class="skip-btn">Skip »</button>
     </div>
 
     <!-- Main Content -->
@@ -72,21 +75,21 @@
                             onerror="this.onerror=null;this.src='https://placehold.co/150x150/0f172a/0ff?text=K.K';">
                     </div>
                    <div class="tech-icons-wrapper">
-    <div class="tech"><i class="fa-brands fa-js"></i></div>
-    <div class="tech"><i class="fa-brands fa-python"></i></div>
-    <div class="tech"><i class="fa-brands fa-react"></i></div>
-    <div class="tech"><i class="fa-brands fa-css3-alt"></i></div>
-    <div class="tech"><i class="fa-brands fa-html5"></i></div>
-    <div class="tech"><i class="fa-brands fa-github"></i></div>
-    <div class="tech"><i class="fa-solid fa-video"></i></div>
-    <div class="tech"><i class="fa-brands fa-bootstrap"></i></div>
-    <div class="tech"><i class="fa-solid fa-code"></i></div>
+    <div class="tech" title="JavaScript"><i class="fa-brands fa-js"></i></div>
+    <div class="tech" title="Python"><i class="fa-brands fa-python"></i></div>
+    <div class="tech" title="React"><i class="fa-brands fa-react"></i></div>
+    <div class="tech" title="CSS3"><i class="fa-brands fa-css3-alt"></i></div>
+    <div class="tech" title="HTML5"><i class="fa-brands fa-html5"></i></div>
+    <div class="tech" title="GitHub"><i class="fa-brands fa-github"></i></div>
+    <div class="tech" title="CCTV & Video"><i class="fa-solid fa-video"></i></div>
+    <div class="tech" title="Bootstrap"><i class="fa-brands fa-bootstrap"></i></div>
+    <div class="tech" title="Coding"><i class="fa-solid fa-code"></i></div>
 </div>
                 </div>
             </div>
             <div class="me-profile">
                 <h1>Kevin Kelly</h1>
-                <h2 class="tagline">Front-End Developer & <br> CCTV Technician</h2>
+                <h2 class="tagline"><span id="typed-1"></span><span class="type-cursor" id="caret-1"></span><br><span id="typed-2"></span><span class="type-cursor" id="caret-2"></span></h2>
                 <p>Hello, I'm <strong>Kevin Kelly</strong> — a dedicated student passionate about
                     <strong>Software development</strong> and <strong>CCTV installation</strong>. This portfolio showcases my <strong>UX/UI</strong>
                     skills and creativity.</p>
@@ -258,47 +261,158 @@
 
         <!-- Copyright -->
         <p class="small text-secondary mb-0">
-            &copy; 2025 Kevin Kelly. All rights reserved.
+            &copy; <span id="year">2025</span> Kevin Kelly. All rights reserved.
         </p>
 
     </div>
 </footer>
 
-    </div>
+    <!-- Back To Top Button -->
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Tech Icons Ring & Loading Screen -->
     <script>
+    <!-- Portfolio Script -->
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const techIconsFrame = document.querySelector('.tech-icons-wrapper');
-            const techIcons = techIconsFrame.querySelectorAll('.tech');
-            const numIcons = techIcons.length;
-            const ringRadius = 280 / 2;
-            const iconSize = 60;
-            const placementRadius = ringRadius - (iconSize / 2) - 5;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            techIcons.forEach((icon, index) => {
-                const angle = (index / numIcons) * 2 * Math.PI;
-                const x = placementRadius * Math.cos(angle);
-                const y = placementRadius * Math.sin(angle);
-                icon.style.left = `calc(50% + ${x}px)`;
-                icon.style.top = `calc(50% + ${y}px)`;
-                icon.style.transform = "translate(-50%, -50%)";
-            });
-        });
+            /* ---------- Footer Year ---------- */
+            const yearEl = document.getElementById('year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-        window.addEventListener("load", () => {
-            const loading = document.getElementById("loading-screen");
-            const main = document.getElementById("main-content");
-            setTimeout(() => {
+            /* ---------- Tech Icon Ring (responsive placement) ---------- */
+            const ring = document.querySelector('.ring');
+            const techIcons = document.querySelectorAll('.tech');
+            const placeIcons = () => {
+                if (!ring || !techIcons.length) return;
+                const iconSize = techIcons[0].offsetWidth || 55;
+                const radius = ring.offsetWidth / 2 - iconSize / 2 - 4;
+                if (radius <= 0) return; // ring hidden (still loading)
+                techIcons.forEach((icon, index) => {
+                    const angle = (index / techIcons.length) * 2 * Math.PI - Math.PI / 2;
+                    icon.style.left = `calc(50% + ${radius * Math.cos(angle)}px)`;
+                    icon.style.top = `calc(50% + ${radius * Math.sin(angle)}px)`;
+                });
+            };
+            placeIcons();
+            window.addEventListener('resize', placeIcons);
+            if (window.ResizeObserver && ring) new ResizeObserver(placeIcons).observe(ring);
+
+            /* ---------- Loading Screen ---------- */
+            const loading = document.getElementById('loading-screen');
+            const main = document.getElementById('main-content');
+            const skipBtn = document.getElementById('skip-loading');
+            let dismissed = false;
+            document.body.style.overflow = 'hidden'; // no scrolling behind the loader
+
+            const hideLoader = () => {
+                if (dismissed) return;
+                dismissed = true;
+                document.body.style.overflow = '';
                 loading.style.opacity = 0;
-                setTimeout(() => {
-                    loading.style.display = "none";
-                    main.style.display = "block";
-                }, 800);
-            }, 3000);
+                main.style.display = 'block';
+                requestAnimationFrame(() => main.classList.add('visible'));
+                setTimeout(() => loading.remove(), 800);
+                placeIcons(); // ring is measurable now that content is visible
+            };
+
+            if (skipBtn) skipBtn.addEventListener('click', hideLoader);
+            window.addEventListener('load', () => setTimeout(hideLoader, 2200));
+
+            /* ---------- Typing Effect ---------- */
+            const typeLine = (id, text, done) => {
+                const el = document.getElementById(id);
+                if (!el) { if (done) done(); return; }
+                let i = 0;
+                const tick = () => {
+                    el.textContent = text.slice(0, ++i);
+                    if (i < text.length) setTimeout(tick, 70);
+                    else if (done) done();
+                };
+                tick();
+            };
+
+            const startTyping = () => {
+                const c1 = document.getElementById('caret-1');
+                const c2 = document.getElementById('caret-2');
+                if (reduceMotion) {
+                    const t1 = document.getElementById('typed-1');
+                    const t2 = document.getElementById('typed-2');
+                    if (t1) t1.textContent = 'Front-End Developer &';
+                    if (t2) t2.textContent = 'CCTV Technician';
+                    if (c1) c1.classList.add('done');
+                    if (c2) c2.classList.add('done');
+                    return;
+                }
+                if (c1) c1.classList.add('on');
+                typeLine('typed-1', 'Front-End Developer &', () => {
+                    if (c1) c1.classList.add('done');
+                    if (c2) c2.classList.add('on');
+                    typeLine('typed-2', 'CCTV Technician', null);
+                });
+            };
+            setTimeout(startTyping, 500);
+
+            /* ---------- Scroll: progress bar, back-to-top, scrollspy ---------- */
+            const bar = document.getElementById('scroll-progress');
+
+            const topBtn = document.getElementById('back-to-top');
+            const navLinks = Array.from(document.querySelectorAll('.navbar-nav .nav-link'));
+            const sections = ['about', 'service', 'projects', 'contact']
+                .map(id => document.getElementById(id))
+                .filter(Boolean);
+
+            const setActiveLink = () => {
+                const pos = window.scrollY + 150;
+                let currentId = '';
+                sections.forEach(s => { if (s.offsetTop <= pos) currentId = s.id; });
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+                });
+            };
+
+            const onScroll = () => {
+                const doc = document.documentElement;
+                const max = doc.scrollHeight - window.innerHeight;
+                if (bar) bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+                if (topBtn) topBtn.classList.toggle('show', window.scrollY > 400);
+                setActiveLink();
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            if (topBtn) {
+                topBtn.addEventListener('click', () =>
+                    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })
+                );
+            }
+
+            /* ---------- Reveal On Scroll ---------- */
+            const revealTargets = [
+                ...document.querySelectorAll('.main-content, .me-profile')
+            ];
+            const cvBtn = document.querySelector('.btn-cv');
+            if (cvBtn && cvBtn.parentElement && !revealTargets.includes(cvBtn.parentElement)) {
+                revealTargets.push(cvBtn.parentElement);
+            }
+            if ('IntersectionObserver' in window && !reduceMotion) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                revealTargets.forEach(el => { el.classList.add('reveal'); io.observe(el); });
+            }
         });
     </script>
 
