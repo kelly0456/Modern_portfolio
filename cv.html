@@ -17,6 +17,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
 
+<!-- Inline styles: resume layout + print rules (used by the "Download as PDF" button) -->
     <style>
       body {
         background: #010c1b;
@@ -89,6 +90,7 @@
           <h1 class="fw-bold">Kevin Kelly</h1>
           <p class="mb-1">Software Developer</p>
           <p class="mb-1">Nairobi, Kenya</p>
+          <!-- Contact details kept as plain text so they print correctly -->
           <p class="mb-1">Phone: +254 714 199 985</p>
           <p>Email: kevinkellyk194@gmail.com</p>
         </div>
@@ -97,6 +99,7 @@
       <hr style="border-top: 2px solid #0a2342" />
 
       <!-- Portfolio -->
+      <!-- Relative link: works locally AND on any deployed host/domain -->
  <p>
   <a
     href="index.html"
@@ -109,6 +112,8 @@
 
 
       <!-- Download -->
+      <!-- window.print() opens the print dialog → "Save as PDF";
+           the .no-print class hides this row on the printed page -->
       <div class="text-center no-print mb-4">
         <button class="btn download-btn" onclick="window.print()">
           <i class="bi bi-download me-2"></i> Download as PDF
@@ -130,6 +135,7 @@
       </p>
 
       <!-- Experience -->
+      <!-- Work history — newest role first -->
       <h4 class="section-title">
         <i class="bi bi-briefcase me-2"></i> Experience
       </h4>

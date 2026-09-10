@@ -14,6 +14,7 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css" />
+    <!-- Favicon: uses the profile photo as a fallback (no .ico file in the repo) -->
     <link rel="icon" type="image/jpeg" href="images/kelly.jpg">
 </head>
 
@@ -64,6 +65,7 @@
             <source src="videos/rocket.mp4" type="video/mp4">
         </video>
         <h2>Welcome to Kelly’s Portfolio</h2>
+        <!-- Lets impatient visitors skip the rocket intro immediately -->
         <button id="skip-loading" class="skip-btn">Skip »</button>
     </div>
 
@@ -78,7 +80,9 @@
                         <img src="./images/kelly.jpg" alt="Kevin Kelly"
                             onerror="this.onerror=null;this.src='https://placehold.co/150x150/0f172a/0ff?text=K.K';">
                     </div>
-                   <div class="tech-icons-wrapper">
+                   <!-- Icon positions are computed by JS (evenly spaced circle, radius adapts
+     to the ring's current size). The title attributes give hover tooltips. -->
+<div class="tech-icons-wrapper">
     <div class="tech" title="JavaScript"><i class="fa-brands fa-js"></i></div>
     <div class="tech" title="Python"><i class="fa-brands fa-python"></i></div>
     <div class="tech" title="React"><i class="fa-brands fa-react"></i></div>
@@ -92,8 +96,11 @@
                 </div>
             </div>
             <div class="me-profile">
+<!-- Filled in by JS based on the visitor's local time (morning/afternoon/evening) -->
                 <p class="greeting" id="greeting"></p>
                 <h1>Kevin Kelly</h1>
+                <!-- The tagline text is typed out by JS; each span holds one
+                     line and each .type-cursor span is its blinking caret -->
                 <h2 class="tagline"><span id="typed-1"></span><span class="type-cursor" id="caret-1"></span><br><span id="typed-2"></span><span class="type-cursor" id="caret-2"></span></h2>
                 <p>Hello, I'm <strong>Kevin Kelly</strong> — a dedicated student passionate about
                     <strong>Software development</strong> and <strong>CCTV installation</strong>. This portfolio showcases my <strong>UX/UI</strong>
@@ -287,11 +294,14 @@
     </button>
 
     <!-- Bootstrap JS -->
+    <!-- Bootstrap JS: enables the mobile navbar collapse toggle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Portfolio Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            /* True when the visitor asked their OS to reduce animations.
+               Every effect below checks this flag before it runs. */
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             /* ---------- Footer Year ---------- */
@@ -301,6 +311,11 @@
             /* ---------- Tech Icon Ring (responsive placement) ---------- */
             const ring = document.querySelector('.ring');
             const techIcons = document.querySelectorAll('.tech');
+            /* Evenly distributes the .tech icons around the ring using
+               trigonometry: angle = (index / total) × 2π, rotated -90° so
+               the first icon starts at the top. Recomputed on resize (and
+               via ResizeObserver) so the radius always matches the ring's
+               current size — no fixed pixel values. */
             const placeIcons = () => {
                 if (!ring || !techIcons.length) return;
                 const iconSize = techIcons[0].offsetWidth || 55;
@@ -323,6 +338,9 @@
             let dismissed = false;
             document.body.style.overflow = 'hidden'; // no scrolling behind the loader
 
+            /* Fades the loader out, reveals #main-content (it starts as
+               display:none in CSS), re-measures the ring, then removes
+               the loader element from the DOM entirely. */
             const hideLoader = () => {
                 if (dismissed) return;
                 dismissed = true;
@@ -338,6 +356,9 @@
             window.addEventListener('load', () => setTimeout(hideLoader, 2200));
 
             /* ---------- Typing Effect ---------- */
+            /* Types "text" into the element #id one character at a time
+               (70ms per character), then calls the done() callback so the
+               next line can start. */
             const typeLine = (id, text, done) => {
                 const el = document.getElementById(id);
                 if (!el) { if (done) done(); return; }
@@ -389,6 +410,9 @@
                 });
             };
 
+            /* Runs on every scroll event (passive listener, so it never
+               blocks scrolling): updates the progress bar width, shows or
+               hides the back-to-top button, and refreshes the scrollspy. */
             const onScroll = () => {
                 const doc = document.documentElement;
                 const max = doc.scrollHeight - window.innerHeight;
@@ -407,6 +431,9 @@
             }
 
             /* ---------- Reveal On Scroll ---------- */
+            /* Elements get the .reveal class (hidden state), then an
+               IntersectionObserver adds .revealed the first time each one
+               enters the viewport; it stops watching afterwards. */
             const revealTargets = [
                 ...document.querySelectorAll('.main-content, .me-profile')
             ];
@@ -466,6 +493,8 @@
                 const ctx = canvas.getContext('2d');
                 let W = 0, H = 0, parts = [], animId = null;
 
+                /* ~1 particle per 20,000px² of screen area, capped at 90
+                   so big monitors stay smooth. */
                 const initParts = () => {
                     const n = Math.min(Math.round((W * H) / 20000), 90);
                     parts = Array.from({ length: n }, () => ({
@@ -484,6 +513,10 @@
                     initParts();
                 };
 
+                /* One animation frame: drift each particle, wrap it around
+                   the screen edges, then redraw it with a per-particle
+                   twinkle (sine-wave opacity). Color comes from the active
+                   theme via particleState.rgb, so it updates on theme switch. */
                 const draw = () => {
                     ctx.clearRect(0, 0, W, H);
                     ctx.fillStyle = `rgba(${particleState.rgb}, 0.9)`;
